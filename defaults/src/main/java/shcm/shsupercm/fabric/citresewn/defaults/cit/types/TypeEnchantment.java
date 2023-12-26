@@ -523,6 +523,6 @@ public class TypeEnchantment extends CITType {
     }
 
     public interface CITBufferBuilderStorage {
-        SortedMap<RenderLayer, BufferBuilder> citresewn$getEntityBuilders();
+        Map<RenderLayer, BufferBuilder> citresewn$getEntityBuilders();
     }
 }
