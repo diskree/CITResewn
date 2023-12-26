@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import shcm.shsupercm.fabric.citresewn.config.BrokenPaths;
 
+import java.util.Optional;
+
 /**
  * Adds a resourcepack compatibility error message when broken paths are enabled and are detected in a pack.
  * @see BrokenPaths
@@ -29,7 +31,7 @@ public abstract class AbstractFileResourcePackMixin implements ResourcePack {
                 });
             }
         } catch (InvalidIdentifierException e) {
-            cir.setReturnValue((T) new PackResourceMetadata(cir.getReturnValue().getDescription(), Integer.MAX_VALUE - 53));
+            cir.setReturnValue((T) new PackResourceMetadata(cir.getReturnValue().description(), Integer.MAX_VALUE - 53, Optional.empty()));
         } catch (Exception ignored) { }
     }
 }

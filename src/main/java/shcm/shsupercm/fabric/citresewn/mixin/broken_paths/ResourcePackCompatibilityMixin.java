@@ -2,6 +2,7 @@ package shcm.shsupercm.fabric.citresewn.mixin.broken_paths;
 
 import net.minecraft.resource.ResourcePackCompatibility;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.util.dynamic.Range;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,9 +25,9 @@ public abstract class ResourcePackCompatibilityMixin {
         throw new AssertionError();
     }
 
-    @Inject(method = "from(ILnet/minecraft/resource/ResourceType;)Lnet/minecraft/resource/ResourcePackCompatibility;", cancellable = true, at = @At("HEAD"))
-    private static void citresewn$brokenpaths$redirectBrokenPathsCompatibility(int packVersion, ResourceType type, CallbackInfoReturnable<ResourcePackCompatibility> cir) {
-        if (packVersion == Integer.MAX_VALUE - 53)
+    @Inject(method = "from", cancellable = true, at = @At("HEAD"))
+    private static void citresewn$brokenpaths$redirectBrokenPathsCompatibility(Range<Integer> range, int current, CallbackInfoReturnable<ResourcePackCompatibility> cir) {
+        if (range.maxInclusive() == Integer.MAX_VALUE - 53)
             cir.setReturnValue(BROKEN_PATHS);
     }
 }
